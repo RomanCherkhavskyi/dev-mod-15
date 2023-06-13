@@ -1,6 +1,7 @@
 package com.example.services;
 
 import com.example.entity.Note;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class NoteService {
 
+    @Getter
     private List<Note> notes = new ArrayList<>();
     public Note add(Note note) {
         notes.add(note);
