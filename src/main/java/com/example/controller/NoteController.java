@@ -13,17 +13,24 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/note")
 public class NoteController {
 
-    private NoteService ns;
+    private NoteService ns = new NoteService();
 
     @GetMapping("/create")
     public String create() {
+
+        		Note note1 = new Note(1L, "NOTE-1", "It's note 1 content");
+		Note note2 = new Note(2L, "NOTE-2", "It's note 2 content");
+        ns.add(note1);
+        ns.add(note2);
+
+
         return "create";
     }
 
     @PostMapping("/create")
     public RedirectView createNote(@ModelAttribute Note note) {
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("/list");
+        redirectView.setUrl("/note/list");
         ns.add(note);
         return redirectView;
     }
@@ -34,6 +41,10 @@ public class NoteController {
         maw.addObject("notes",ns.listAll());
         return maw;
     }
+
+
+
+
 
     @GetMapping("/edit")
     public String edit(Model model, @RequestParam long id) {
