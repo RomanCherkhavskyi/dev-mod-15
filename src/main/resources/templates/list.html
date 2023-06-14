@@ -8,8 +8,6 @@
     <title>Note list</title>
 </head>
 <body>
-<h1> HELLO !!! </h1>
-<h1 th:text="${notes}"></h1>
 
 
 <table>
@@ -20,16 +18,16 @@
     </tr>
     </thead>
     <tbody>
-<!--    <tr th:each="note : ${notes}">-->
-<!--        <td th:text="${note.title}"></td>-->
-<!--        <td>-->
-<!--            <span th:text="${note.content}"></span>-->
-<!--&lt;!&ndash;            <a th:href="'/note/delete?id=' + ${note.id}"&ndash;&gt;-->
-<!--&lt;!&ndash;               class="btn btn-sm btn-outline-danger">Delete</a>&ndash;&gt;-->
-<!--&lt;!&ndash;            <a th:href="'/note/update?id=' + ${note.id}"&ndash;&gt;-->
-<!--&lt;!&ndash;               class="btn btn-sm btn-outline-success">Edit note</a>&ndash;&gt;-->
-<!--        </td>-->
-<!--    </tr>-->
+    <tr th:each="note : ${notes}">
+        <td th:text="${note.title}"></td>
+        <td>
+            <span th:text="${note.content}"></span>
+            <a th:href="'/note/delete?id=' + ${note.id}"
+               class="btn btn-sm btn-outline-danger">Delete</a>
+            <a th:href="'/note/update?id=' + ${note.id}"
+               class="btn btn-sm btn-outline-success">Edit note</a>
+        </td>
+    </tr>
 
     </tbody>
 </table>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+<div class="container mt-3">
+  <form action="/note/update" method="POST" th:object="${note}">
+    <div class="card">
+      <div class="card-header">Edit a note</div>
+      <div class="card-body">
+
+        <label for="id"></label><input id="id" th:field="*{id}" hidden="hidden"/>
+
+        <label for="title" class="form-label">Enter title to edit</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="title" name="title" th:field="*{title}">
+        </div>
+
+        <label for="content" class="form-label">Enter content to edit</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="content" name="content" th:field="*{content}">
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn-primary">Update a note</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+</body>
+</html>
