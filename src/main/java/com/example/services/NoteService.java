@@ -12,7 +12,7 @@ import java.util.List;
 public class NoteService {
 
     @Getter
-    private List<Note> notes = new ArrayList<>();
+    private final List<Note> notes = new ArrayList<>();
     public Note add(Note note) {
         notes.add(note);
         return note;
@@ -47,5 +47,7 @@ public class NoteService {
         }
 
     }
+
+
 
 }

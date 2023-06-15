@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.Note;
 import com.example.services.NoteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,21 +11,21 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/note")
 public class NoteController {
 
-    private NoteService ns = new NoteService();
+    private final NoteService ns;
 
     @GetMapping("/create")
     public String create() {
 
-        		Note note1 = new Note(1L, "NOTE-1", "It's note 1 content");
-		Note note2 = new Note(2L, "NOTE-2", "It's note 2 content");
+        		Note note1 = new Note(10L, "NOTE-1", "It's note 1 content");
+		Note note2 = new Note(20L, "NOTE-2", "It's note 2 content");
         ns.add(note1);
         ns.add(note2);
 
-
-        return "create";
+        return ("create");
     }
 
     @PostMapping("/create")
@@ -32,6 +33,7 @@ public class NoteController {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/note/list");
         ns.add(note);
+        System.out.println(note);
         return redirectView;
     }
 
@@ -43,21 +45,21 @@ public class NoteController {
     }
 
 
-
-
-
-    @GetMapping("/edit")
+    @GetMapping("/update")
     public String edit(Model model, @RequestParam long id) {
         Note note = ns.getById(id);
         model.addAttribute("note", note);
-        return "note/list";
+        return ("/note/update");
     }
 
-    @PostMapping("/edit")
-    public RedirectView editNote(@ModelAttribute Note note) {
+    @PostMapping("/update")
+    public RedirectView editNote(@RequestParam("id") long noteId, @ModelAttribute Note note) {
         RedirectView rv = new RedirectView();
         rv.setUrl("/note/list");
-        ns.update(note);
+        Note note1 = ns.getById(noteId);
+        note1.setTitle(note.getTitle());
+        note1.setContent(note.getContent());
+        ns.update(note1);
         return rv;
     }
 
