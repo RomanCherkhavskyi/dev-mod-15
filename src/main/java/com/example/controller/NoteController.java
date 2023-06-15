@@ -41,7 +41,7 @@ public class NoteController {
     public String edit(Model model, @RequestParam long id) {
         Note note = ns.getById(id);
         model.addAttribute("note", note);
-        return ("/note/update");
+        return ("update");
     }
 
     @PostMapping("/update")
