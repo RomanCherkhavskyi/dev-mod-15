@@ -1,53 +1,51 @@
 package com.example.services;
 
 import com.example.entity.Note;
-import lombok.Getter;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class NoteService {
 
-    @Getter
-    private final List<Note> notes = new ArrayList<>();
+    private final Map<Long, Note> notes = new HashMap<>();
     public Note add(Note note) {
-        notes.add(note);
+        long id = generateUniqueId();
+        note.setId(id);
+        notes.put(id, note);
         return note;
     }
 
-    public List<Note> listAll() {
-        return notes;
-    }
-
-    @SneakyThrows
     public Note getById(long id) {
-
-        for (Note readNote: notes) {
-            if (readNote.getId()== id) return readNote;
+        if(!notes.containsKey(id)){
+            throw new NoSuchElementException("Note with id " + id + " does not exist.");
+        }else{
+            return notes.get(id);
         }
-        throw new Exception("note not found");
     }
 
     public void deleteById(long id)  {
-        for (int i = 0; i < notes.size(); i++) {
-            if (notes.get(i).getId() == id) notes.remove(i);
+        if(!notes.containsKey(id)){
+            throw new NoSuchElementException("Note with id " + id + " does not exist.");
+        }else{
+            notes.remove(id);
         }
     }
 
-    @SneakyThrows
     public void update(Note note) {
-        for (Note readNote: notes) {
-            if (readNote.getId()==note.getId()) {
-                readNote.setTitle(note.getTitle());
-                readNote.setContent(note.getContent());
-            }
+        if(!notes.containsKey(note.getId())){
+            throw new NoSuchElementException("Note with id " + note.getId() + " does not exist.");
+        }else{
+            notes.put(note.getId(), note);
         }
-
+    }
+    public List<Note> listAll(){
+        return new ArrayList<>(notes.values());
     }
 
+    private long generateUniqueId(){
+        return new Random().nextLong();
+    }
 
 
 }

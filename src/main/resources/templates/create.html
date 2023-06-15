@@ -8,17 +8,45 @@
     <title>Note create</title>
 </head>
 <body>
-<h1>Note create</h1>
+<!--<h1>Note create</h1>-->
 
-<form>
-  <label for="noteTitle">Note title:</label>
-  <input type="text" id="noteTitle" name="noteTitle"><br><br>
+<!--<form>-->
+<!--  <label for="noteTitle">Note title:</label>-->
+<!--  <input type="text" id="noteTitle" name="noteTitle"><br><br>-->
 
-  <label for="noteContent">Note content:</label>
-  <textarea id="noteContent" name="noteContent" rows="4" cols="50"></textarea><br><br>
+<!--  <label for="noteContent">Note content:</label>-->
+<!--  <textarea id="noteContent" name="noteContent" rows="4" cols="50"></textarea><br><br>-->
 
-    <a href="/note/list"
-       class="btn btn-sm btn-outline-success">Save note</a>
-</form>
+<!--    <a href="/note/list"-->
+<!--       class="btn btn-sm btn-outline-success">Save note</a>-->
+<!--</form>-->
+
+<div class="container mt-3">
+    <form action="/note/create" method="POST">
+        <div class="card">
+            <div class="card-header">Create new note</div>
+            <div class="card-body">
+
+                <label for="Title" class="form-label">Enter title</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="Title" name="title">
+                </div>
+
+                <label for="Content" class="form-label">Enter content</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="Content" name="content">
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn-primary">Create note</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
 </body>
 </html>

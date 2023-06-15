@@ -9,22 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-
-@Controller
-@RequiredArgsConstructor
 @RequestMapping("/note")
+@RequiredArgsConstructor
+@Controller
 public class NoteController {
 
     private final NoteService ns;
 
     @GetMapping("/create")
     public String create() {
-
-        		Note note1 = new Note(10L, "NOTE-1", "It's note 1 content");
-		Note note2 = new Note(20L, "NOTE-2", "It's note 2 content");
-        ns.add(note1);
-        ns.add(note2);
-
         return ("create");
     }
 
@@ -33,13 +26,12 @@ public class NoteController {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/note/list");
         ns.add(note);
-        System.out.println(note);
         return redirectView;
     }
 
     @GetMapping("/list")
     public ModelAndView getNotes() {
-        ModelAndView maw = new ModelAndView("list");
+        ModelAndView maw = new ModelAndView("note");
         maw.addObject("notes",ns.listAll());
         return maw;
     }
@@ -53,13 +45,10 @@ public class NoteController {
     }
 
     @PostMapping("/update")
-    public RedirectView editNote(@RequestParam("id") long noteId, @ModelAttribute Note note) {
+    public RedirectView editNote(@ModelAttribute Note note) {
         RedirectView rv = new RedirectView();
         rv.setUrl("/note/list");
-        Note note1 = ns.getById(noteId);
-        note1.setTitle(note.getTitle());
-        note1.setContent(note.getContent());
-        ns.update(note1);
+        ns.update(note);
         return rv;
     }
 
