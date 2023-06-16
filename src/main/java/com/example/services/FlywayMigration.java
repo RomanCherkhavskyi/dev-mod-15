@@ -9,7 +9,7 @@ public class FlywayMigration {
         Flyway flyway = Flyway
                 .configure()
                 .baselineOnMigrate(true)
-                .dataSource("jdbc:h2:C:\\goit\\dev\\dvm12\\MyDB","","")
+                .dataSource("jdbc:h2:.\\MyDB","","")
                 .load();
 
         flyway.migrate();
